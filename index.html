@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="d3/d3.v3.js"></script>
+    </head>
+    <body>
+      <div id='lorem'>
+        lorem ipsum dolor sit amet.
+      </div>
+
+      <div id='data'>
+      </div>
+      <div id='last'>
+      </div>
+      <p>end.</p>
+        <script type="text/javascript">
+            // chaining methods:
+            d3.select("#lorem").append("p").text("New paragraph!");
+
+            // without chain syntax:
+            var body = d3.select("#last");
+            var p = body.append("p");
+            p.text("New paragraph in div#last");
+
+            // Data
+            var dataset = [ 5, 10, 15, 20, 25 ];
+            // make a new paragraph for each value in the dataset:
+            d3.select("#data").selectAll("p").data(dataset).enter().append("p")
+              //.text("Data!");
+              //.text(function(d) { return d; }); 
+              //.text(function(d) { return "i can count up to:" + d }).style("color", "red"); 
+              .text(function(d) { return "i can count up to:" + d }).style("color",
+                  function(d) { 
+                    if (d > 15) { //Threshold od 15 
+                      return "red";
+                    } else {
+                      return "black";
+                    }
+                  }); 
+              // when chaining methods together, anytime after you call data(),
+              // you can create an anonymous function that accepts d as input.
+              // The magical data() method ensures that d is set to the 
+              // corresponding value in your original data set, given the current element at hand.
+
+
+
+
+        </script>
+    </body>
+</html>
