@@ -4,10 +4,21 @@
         <meta charset="utf-8">
         <title>D3 Test</title>
         <script type="text/javascript" src="d3/d3.v3.js"></script>
+        <style>
+            .bar { 
+               display: inline-block;
+               width: 20px;
+               height: 75px;
+               background-color: teal;
+               margin-right: 2px;
+            }
+        </style>
     </head>
     <body>
       <div id='lorem'>
         lorem ipsum dolor sit amet.
+      </div>
+      <div class='bar'>
       </div>
 
       <div id='data'>
@@ -44,6 +55,17 @@
               // The magical data() method ensures that d is set to the 
               // corresponding value in your original data set, given the current element at hand.
 
+
+            // to give our divs a class of bar, we can use: .attr("class", "bar")
+            var divs = d3.select("#data").selectAll("div")
+            var divs_bars = divs.data(dataset).enter().append("div").attr("class", "bar")
+            // var divs_bars_stil = divs_bars.style("height", function(d) { return d + "px"; });
+            var divs_bars_stil = divs_bars.style("height", function(d) { 
+                                             var barHeight = d * 5; // scale up by factor 5
+                                             return barHeight + "px"; 
+                                           });
+
+            divs_bars_stil.text(" ");
 
 
 
